@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<div th:fragment="sidebar">
+
+<div id="app">
+    <div id="sidebar" class="active">
+        <div class="sidebar-wrapper active">
+            <div class="sidebar-header">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <a href="/">
+                            <span style="font-family: 'Gamja Flower', cursive;font-size:25px;color:#1c3c6c;">슬기로운 1인생활.</span>
+                        </a>
+                    </div>
+                    <div class="toggler">
+                        <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div  style="margin-top:-25px;" class="sidebar-menu">
+                <ul class="menu">
+
+                    <li class="sidebar-item">
+                        <a href="/admin/Home" class='sidebar-link'>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-door" viewBox="0 0 16 16">
+                                <path d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146zM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4H2.5z"/>
+                            </svg>
+                            <span>HOME</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-title">shop</li>
+
+                    <li class="sidebar-item">
+                        <a href="/admin/products/new" class='sidebar-link'>
+                            <i class="bi bi-cart"></i>
+                            <span>상품 등록/수정/삭제</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-title">order</li>
+
+                    <li class="sidebar-item">
+                        <a href="index.html" class='sidebar-link'>
+                            <i class="bi bi-calendar-check"></i>
+                            <span>주문 조회</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-item">
+                        <a href="index.html" class='sidebar-link'>
+                            <i class="bi bi-truck"></i>
+                            <span>배송 조회</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-item">
+                        <a href="index.html" class='sidebar-link'>
+                            <i class="bi bi-box-seam"></i>
+                            <span>취소/교환/반품</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-title">board</li>
+
+                    <li class="sidebar-item">
+                        <a href="index.html" class='sidebar-link'>
+                            <i class="bi bi-pencil-square"></i>
+                            <span>게시물 등록/수정/삭제</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-title">member</li>
+
+                    <li class="sidebar-item">
+                        <a href="index.html" class='sidebar-link'>
+                            <i class="bi bi-person"></i>
+                            <span>회원 정보 조회</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-title">매출 분석</li>
+
+                    <li class="sidebar-item">
+                        <a href="index.html" class='sidebar-link'>
+                            <i class="bi bi-clipboard-data"></i>
+                            <span id="sidebar-font-size">일자별 매출 조회</span>
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+            <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
+        </div>
+    </div>
+
+    <div id="main">
+        <header class="mb-3">
+            <a href="#" class="burger-btn d-block d-xl-none">
+                <i class="bi bi-justify fs-3"></i>
+            </a>
+        </header>
+
+
+        <th:block layout:fragment="content" class="content"></th:block>
+
+
+    </div>
+</div>
+</div>
+</html>
