@@ -2,6 +2,9 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+
 <div th:fragment="sidebar">
 
 <div id="app">
@@ -11,7 +14,7 @@
                 <div class="d-flex justify-content-between">
                     <div>
                         <a href="/">
-                            <span style="font-family: 'Gamja Flower', cursive;font-size:25px;color:#1c3c6c;">슬기로운 1인생활.</span>
+                            <span style="font-family: 'Gamja Flower', cursive;font-size:30px;color:#1c3c6c;margin-left:20px;">WISE.</span>
                         </a>
                     </div>
                     <div class="toggler">
@@ -36,30 +39,28 @@
                     <li class="sidebar-item">
                         <a href="/admin/products/new" class='sidebar-link'>
                             <i class="bi bi-cart"></i>
-                            <span>상품 등록/수정/삭제</span>
+                            <span class="sidebar-text">상품 등록/수정/삭제</span>
                         </a>
                     </li>
-
-                    <li class="sidebar-title">order</li>
 
                     <li class="sidebar-item">
                         <a href="index.html" class='sidebar-link'>
                             <i class="bi bi-calendar-check"></i>
-                            <span>주문 조회</span>
+                            <span class="sidebar-text">주문 조회</span>
                         </a>
                     </li>
 
                     <li class="sidebar-item">
                         <a href="index.html" class='sidebar-link'>
                             <i class="bi bi-truck"></i>
-                            <span>배송 조회</span>
+                            <span class="sidebar-text">배송 조회</span>
                         </a>
                     </li>
 
                     <li class="sidebar-item">
                         <a href="index.html" class='sidebar-link'>
                             <i class="bi bi-box-seam"></i>
-                            <span>취소/교환/반품</span>
+                            <span class="sidebar-text">취소/교환/반품</span>
                         </a>
                     </li>
 
@@ -68,7 +69,7 @@
                     <li class="sidebar-item">
                         <a href="index.html" class='sidebar-link'>
                             <i class="bi bi-pencil-square"></i>
-                            <span>게시물 등록/수정/삭제</span>
+                            <span class="sidebar-text">게시물 등록/수정/삭제</span>
                         </a>
                     </li>
 
@@ -77,16 +78,16 @@
                     <li class="sidebar-item">
                         <a href="index.html" class='sidebar-link'>
                             <i class="bi bi-person"></i>
-                            <span>회원 정보 조회</span>
+                            <span class="sidebar-text">회원 정보 조회</span>
                         </a>
                     </li>
 
-                    <li class="sidebar-title">매출 분석</li>
+                    <li class="sidebar-title" style="font-family: 'Nanum Gothic', sans-serif; font-size:12px;">매출 분석</li>
 
                     <li class="sidebar-item">
                         <a href="index.html" class='sidebar-link'>
                             <i class="bi bi-clipboard-data"></i>
-                            <span id="sidebar-font-size">일자별 매출 조회</span>
+                            <span class="sidebar-text">일자별 매출 조회</span>
                         </a>
                     </li>
 

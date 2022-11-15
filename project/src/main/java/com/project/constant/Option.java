@@ -1,7 +1,7 @@
 package com.project.constant;
 
 public enum Option {
-    맛(""), 색상(""), 옵션("");
+    TASTE("맛"), COLOR("색상"), OPTION("옵션");
 
     private String option_name ;
     Option(String option_name) {

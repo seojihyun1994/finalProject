@@ -6,6 +6,10 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+	<meta th:if="${_csrf}" name="_csrf" th:content="${_csrf.token}"/>
+	<meta th:if="${_csrf}" name="_csrf_header" th:content="${_csrf.headerName}"/>
+	<meta th:if="${_csrf}" name="_csrf_parameter" th:content="${_csrf.parameterName}"/>
+
 	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" th:href="@{/bootstrap/login/css/style.css}">
@@ -14,6 +18,21 @@
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Gaegu:wght@300&family=Gamja+Flower&display=swap" rel="stylesheet">
+
+
+
+	<script th:inline="javascript">
+
+		 /*<![CDATA[*/
+			var message = [[${loginErrorMsg}]]
+			if(message !==null){
+			alert(message);
+}
+		/*]]>*/
+
+    </script>
+
+
 </head>
 	<body class="img js-fullheight" style="background-image: url(/bootstrap/login/images/bg.jpg);">
 	<section class="ftco-section">
@@ -30,20 +49,24 @@
 				<a href="/">
 		      		<h3 style="font-family: 'Gamja Flower', cursive;" class="mb-4 text-center">슬기로운 1인생활</h3>
 				</a>
-				<form action="#" class="signin-form">
+				<form method="post" action="/members/login" class="signin-form">
 		      		<div class="form-group">
-		      			<input type="text" class="form-control" placeholder="email" required>
+		      			<input name="email" type="email" class="form-control" placeholder="email">
 		      		</div>
 	            <div class="form-group">
-	              <input id="password-field" type="password" class="form-control" placeholder="Password" required>
+	              <input id="password-field" name="password" type="password" class="form-control" placeholder="Password">
 	              <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
 	            </div>
+
+<!--				<p th:if="${loginErrorMsg}" class="error" th:text="${loginErrorMsg}"></p>-->
+
 	            <div class="form-group">
-	            	<button type="submit" class="form-control btn btn-primary submit px-3">로그인</button>
+	            	<button class="form-control btn btn-primary submit px-3">로그인</button>
 	            </div>
 
+
 	            <div style="margin-top:25px;" align="center">
-					<a href="#" style="color: #fff">회원가입</a>&nbsp|&nbsp
+					<a href="/members/new" style="color: #fff">회원가입</a>&nbsp|&nbsp
 					<a href="#" style="color: #fff">아이디 찾기</a>&nbsp|&nbsp
 					<a href="#" style="color: #fff">비밀번호 찾기</a>
 
@@ -67,6 +90,7 @@
 
 
 				</div>
+					<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
 	          </form>
 <!--	          <p class="w-100 text-center">&mdash; Or Sign In With &mdash;</p>-->
 <!--	          <div class="social d-flex text-center">-->
