@@ -3,13 +3,38 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layouts/mylayout}">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<th:block layout:fragment="script">
+
+    <script th:inline="javascript">
+      function setThumbnail(event) {
+        for (var image of event.target.files) {
+          var reader = new FileReader();
+
+          reader.onload = function(event) {
+            var img = document.createElement("img");
+            img.setAttribute("src", event.target.result);
+            img.setAttribute("style","width:150px;height:150px;margin-top:30px;margin-left:20px;");
+            document.querySelector("div#image_container").appendChild(img);
+           };
+
+          console.log(image);
+          reader.readAsDataURL(image);
+        }
+      }
+
+
+ </script>
+</th:block>
+
+
 <div class="content" layout:fragment="content">
 
-            <div class="page-heading">
+    <form role="form" method="post" enctype="multipart/form-data" th:object="${productFormDto}">
+        <div class="page-heading">
                 <div class="page-title">
                     <div class="row">
                         <div class="col-12 col-md-6 order-md-1 order-last">
-                            <span style="color:#25396F;font-size:17px" class="sidebar-text"><b>상품 등록</b></span>
+                            <h4>상품 등록</h4>
                         </div>
                         <div class="col-12 col-md-6 order-md-2 order-first">
                             <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
@@ -31,56 +56,25 @@
                 <!-- Basic Horizontal form layout section start -->
                 <section id="basic-horizontal-layouts">
                     <div class="row match-height">
-                        <div class="col-md-6 col-12">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h4 class="card-title">이미지</h4>
-                                </div>
+                        <div class="col-md-7 col-12">
+                            <div style="" class="card">
                                 <div class="card-content">
                                     <div class="card-body">
-                                        <form class="form form-horizontal">
-                                            <div class="form-body">
-                                                <div class="row">
-                                                    <div class="col-md-4">
-                                                        <label>First Name</label>
-                                                    </div>
-                                                    <div class="col-md-8 form-group">
-                                                        <input type="text" id="first-name" class="form-control"
-                                                            name="fname" placeholder="First Name">
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                        <label>Email</label>
-                                                    </div>
-                                                    <div class="col-md-8 form-group">
-                                                        <input type="email" id="email-id" class="form-control"
-                                                            name="email-id" placeholder="Email">
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                        <label>Mobile</label>
-                                                    </div>
-                                                    <div class="col-md-8 form-group">
-                                                        <input type="number" id="contact-info" class="form-control"
-                                                            name="contact" placeholder="Mobile">
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                        <label>Password</label>
-                                                    </div>
-                                                    <div class="col-md-8 form-group">
-                                                        <input type="password" id="password" class="form-control"
-                                                            name="password" placeholder="Password">
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                        </form>
+                                        <h4 class="card-title">이미지</h4>
+                                       <div th:each="num: ${#numbers.sequence(1,3)}">
+                                           <input class="form-control form-control-sm"  id="image" accept="image/*" onchange="setThumbnail(event);" type="file" multiple>
+                                       </div>
+<!--                                       <input class="form-control form-control-sm"  id="image" accept="image/*" onchange="setThumbnail(event);" type="file" multiple>-->
+<!--                                        id="formFileSm"-->
+                                        <div id="image_container"></div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6 col-12">
+                        <div class="col-md-5 col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title">Horizontal Form with Icons</h4>
+                                    <h4 class="card-title">상품 기본 정보</h4>
                                 </div>
                                 <div class="card-content">
                                     <div class="card-body">
@@ -93,8 +87,13 @@
                                                     <div class="col-md-8">
                                                         <div class="form-group has-icon-left">
                                                             <div class="position-relative">
-                                                                <input type="text" class="form-control"
-                                                                    placeholder="Name" name="name">
+                                                                <input type="text" class="form-control">
+                                                                <div class="form-control-icon">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-tag" viewBox="0 0 16 16">
+                                                                        <path d="M6 4.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm-1 0a.5.5 0 1 0-1 0 .5.5 0 0 0 1 0z"/>
+                                                                        <path d="M2 1h4.586a1 1 0 0 1 .707.293l7 7a1 1 0 0 1 0 1.414l-4.586 4.586a1 1 0 0 1-1.414 0l-7-7A1 1 0 0 1 1 6.586V2a1 1 0 0 1 1-1zm0 5.586 7 7L13.586 9l-7-7H2v4.586z"/>
+                                                                    </svg>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -104,38 +103,28 @@
                                                     <div class="col-md-8">
                                                         <div class="form-group has-icon-left">
                                                             <div class="position-relative">
-                                                                <input type="email" class="form-control"
-                                                                    placeholder="Email" id="first-name-icon">
+                                                                <input type="number" class="form-control">
                                                                 <div class="form-control-icon">
-                                                                    <i class="bi bi-envelope"></i>
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-coin" viewBox="0 0 16 16">
+                                                                        <path d="M5.5 9.511c.076.954.83 1.697 2.182 1.785V12h.6v-.709c1.4-.098 2.218-.846 2.218-1.932 0-.987-.626-1.496-1.745-1.76l-.473-.112V5.57c.6.068.982.396 1.074.85h1.052c-.076-.919-.864-1.638-2.126-1.716V4h-.6v.719c-1.195.117-2.01.836-2.01 1.853 0 .9.606 1.472 1.613 1.707l.397.098v2.034c-.615-.093-1.022-.43-1.114-.9H5.5zm2.177-2.166c-.59-.137-.91-.416-.91-.836 0-.47.345-.822.915-.925v1.76h-.005zm.692 1.193c.717.166 1.048.435 1.048.91 0 .542-.412.914-1.135.982V8.518l.087.02z"/>
+                                                                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                                                        <path d="M8 13.5a5.5 5.5 0 1 1 0-11 5.5 5.5 0 0 1 0 11zm0 .5A6 6 0 1 0 8 2a6 6 0 0 0 0 12z"/>
+                                                                    </svg>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-4">
-                                                        <label>Mobile</label>
+                                                        <label>적립 포인트 : </label>
                                                     </div>
                                                     <div class="col-md-8">
                                                         <div class="form-group has-icon-left">
                                                             <div class="position-relative">
-                                                                <input type="number" class="form-control"
-                                                                    placeholder="Mobile">
+                                                                <input type="number" class="form-control">
                                                                 <div class="form-control-icon">
-                                                                    <i class="bi bi-phone"></i>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                        <label>Password</label>
-                                                    </div>
-                                                    <div class="col-md-8">
-                                                        <div class="form-group has-icon-left">
-                                                            <div class="position-relative">
-                                                                <input type="password" class="form-control"
-                                                                    placeholder="Password">
-                                                                <div class="form-control-icon">
-                                                                    <i class="bi bi-lock"></i>
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-p-circle" viewBox="0 0 16 16">
+                                                                        <path d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8Zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0ZM5.5 4.002h2.962C10.045 4.002 11 5.104 11 6.586c0 1.494-.967 2.578-2.55 2.578H6.784V12H5.5V4.002Zm2.77 4.072c.893 0 1.419-.545 1.419-1.488s-.526-1.482-1.42-1.482H6.778v2.97H8.27Z"/>
+                                                                    </svg>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -157,71 +146,18 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4 class="card-title">Multiple Column</h4>
+                                    <h4 class="card-title">구매 기간</h4>
                                 </div>
                                 <div class="card-content">
                                     <div class="card-body">
-                                        <form class="form">
-                                            <div class="row">
-                                                <div class="col-md-6 col-12">
-                                                    <div class="form-group">
-                                                        <label for="first-name-column">First Name</label>
-                                                        <input type="text" id="first-name-column" class="form-control"
-                                                               placeholder="First Name" name="fname-column">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6 col-12">
-                                                    <div class="form-group">
-                                                        <label for="last-name-column">Last Name</label>
-                                                        <input type="text" id="last-name-column" class="form-control"
-                                                               placeholder="Last Name" name="lname-column">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6 col-12">
-                                                    <div class="form-group">
-                                                        <label for="city-column">City</label>
-                                                        <input type="text" id="city-column" class="form-control"
-                                                               placeholder="City" name="city-column">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6 col-12">
-                                                    <div class="form-group">
-                                                        <label for="country-floating">Country</label>
-                                                        <input type="text" id="country-floating" class="form-control"
-                                                               name="country-floating" placeholder="Country">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6 col-12">
-                                                    <div class="form-group">
-                                                        <label for="company-column">Company</label>
-                                                        <input type="text" id="company-column" class="form-control"
-                                                               name="company-column" placeholder="Company">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6 col-12">
-                                                    <div class="form-group">
-                                                        <label for="email-id-column">Email</label>
-                                                        <input type="email" id="email-id-column" class="form-control"
-                                                               name="email-id-column" placeholder="Email">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group col-12">
-                                                    <div class='form-check'>
-                                                        <div class="checkbox">
-                                                            <input type="checkbox" id="checkbox5"
-                                                                   class='form-check-input' checked>
-                                                            <label for="checkbox5">Remember Me</label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-12 d-flex justify-content-end">
-                                                    <button type="submit"
-                                                            class="btn btn-primary me-1 mb-1">Submit</button>
-                                                    <button type="reset"
-                                                            class="btn btn-light-secondary me-1 mb-1">Reset</button>
-                                                </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                공동구매 시작날짜
                                             </div>
-                                        </form>
+                                            <div class="col-md-6">
+                                                공동구매 마감날짜
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -229,167 +165,125 @@
                     </div>
                 </section>
                 <!-- // Basic multiple Column Form section end -->
-            </div>
 
-
-                <!-- Basic Vertical form layout section start -->
-                <section id="basic-vertical-layouts">
-                    <div class="row match-height">
-                        <div class="col-md-6 col-12">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h4 class="card-title">Vertical Form</h4>
-                                </div>
-                                <div class="card-content">
-                                    <div class="card-body">
-                                        <form class="form form-vertical">
-                                            <div class="form-body">
-                                                <div class="row">
-                                                    <div class="col-12">
-                                                        <div class="form-group">
-                                                            <label for="first-name-vertical">First Name</label>
-                                                            <input type="text" id="first-name-vertical"
-                                                                class="form-control" name="fname"
-                                                                placeholder="First Name">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12">
-                                                        <div class="form-group">
-                                                            <label for="email-id-vertical">Email</label>
-                                                            <input type="email" id="email-id-vertical"
-                                                                class="form-control" name="email-id"
-                                                                placeholder="Email">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12">
-                                                        <div class="form-group">
-                                                            <label for="contact-info-vertical">Mobile</label>
-                                                            <input type="number" id="contact-info-vertical"
-                                                                class="form-control" name="contact"
-                                                                placeholder="Mobile">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12">
-                                                        <div class="form-group">
-                                                            <label for="password-vertical">Password</label>
-                                                            <input type="password" id="password-vertical"
-                                                                class="form-control" name="contact"
-                                                                placeholder="Password">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12">
-                                                        <div class='form-check'>
-                                                            <div class="checkbox">
-                                                                <input type="checkbox" id="checkbox3"
-                                                                    class='form-check-input' checked>
-                                                                <label for="checkbox3">Remember Me</label>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12 d-flex justify-content-end">
-                                                        <button type="submit"
-                                                            class="btn btn-primary me-1 mb-1">Submit</button>
-                                                        <button type="reset"
-                                                            class="btn btn-light-secondary me-1 mb-1">Reset</button>
-                                                    </div>
-                                                </div>
+            <!-- 카테고리 -->
+            <section class="basic-choices">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-content">
+                                <div class="card-body">
+                                    <h4 class="card-title">카테고리</h4>
+                                    <div style="margin-top:30px;" class="row">
+                                        <div class="col-md-6 mb-4">
+                                            <div class="form-group">
+                                                <select th:field="*{productStatus}" class="choices form-select">
+                                                    <option value="PROCESSED_FOOD">가공식품</option>
+                                                    <option value="FRESH_FOOD">신선식품</option>
+                                                    <option value="KITCHEN">주방용품</option>
+                                                    <option value="CLEANING">청소용품</option>
+                                                    <option value="LIFE">생활용품</option>
+                                                    <option value="DISPASABLE">일회용품</option>
+                                                    <option value="SMALL_APPLIANCES">소형가전제품</option>
+                                                    <option value="QUASI_DRUGS">의약외품</option>
+                                                </select>
                                             </div>
-                                        </form>
+                                        </div>
+
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6 col-12">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h4 class="card-title">Vertical Form with Icons</h4>
+                    </div>
+
+                </div>
+            </section>
+            <!-- Basic choices end -->
+
+
+    <!-- 옵션 -->
+    <section class="basic-choices">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-content">
+                        <div class="card-body">
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h4 class="card-title">옵션</h4>
+                                    <div style="margin-top:30px;" class="row">
+                                        <div class="col-md-6 mb-4">
+                                            <div class="form-group">
+                                                <select th:field="*{productStatus}" class="choices form-select">
+                                                    <option value="PROCESSED_FOOD">가공식품</option>
+                                                    <option value="FRESH_FOOD">신선식품</option>
+                                                    <option value="KITCHEN">주방용품</option>
+                                                    <option value="CLEANING">청소용품</option>
+                                                    <option value="LIFE">생활용품</option>
+                                                    <option value="DISPASABLE">일회용품</option>
+                                                    <option value="SMALL_APPLIANCES">소형가전제품</option>
+                                                    <option value="QUASI_DRUGS">의약외품</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
+                                <div class="col-md-6">
+                                    <h4 class="card-title">옵션 디테일</h4>
+                                    <div style="margin-top:30px;" class="row">
+                                        <div class="col-md-6 mb-4">
+                                            <div class="form-group">
+                                                <select th:field="*{productStatus}" class="choices form-select">
+                                                    <option value="PROCESSED_FOOD">가공식품</option>
+                                                    <option value="FRESH_FOOD">신선식품</option>
+                                                    <option value="KITCHEN">주방용품</option>
+                                                    <option value="CLEANING">청소용품</option>
+                                                    <option value="LIFE">생활용품</option>
+                                                    <option value="DISPASABLE">일회용품</option>
+                                                    <option value="SMALL_APPLIANCES">소형가전제품</option>
+                                                    <option value="QUASI_DRUGS">의약외품</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+            <!-- Basic choices end -->
+
+                <section class="basic-choices">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
                                 <div class="card-content">
                                     <div class="card-body">
-                                        <form class="form form-vertical">
-                                            <div class="form-body">
-                                                <div class="row">
-                                                    <div class="col-12">
-                                                        <div class="form-group has-icon-left">
-                                                            <label for="first-name-icon">First Name</label>
-                                                            <div class="position-relative">
-                                                                <input type="text" class="form-control"
-                                                                    placeholder="Input with icon left"
-                                                                    id="first-name-icon">
-                                                                <div class="form-control-icon">
-                                                                    <i class="bi bi-person"></i>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12">
+                                        <h4 class="card-title">상세 설명</h4>
 
-                                                        <div class="form-group has-icon-left">
-                                                            <label for="email-id-icon">Email</label>
-                                                            <div class="position-relative">
-                                                                <input type="text" class="form-control"
-                                                                    placeholder="Email" id="email-id-icon">
-                                                                <div class="form-control-icon">
-                                                                    <i class="bi bi-envelope"></i>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12">
-                                                        <div class="form-group has-icon-left">
-                                                            <label for="mobile-id-icon">Mobile</label>
-                                                            <div class="position-relative">
-                                                                <input type="text" class="form-control"
-                                                                    placeholder="Mobile" id="mobile-id-icon">
-                                                                <div class="form-control-icon">
-                                                                    <i class="bi bi-phone"></i>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12">
-                                                        <div class="form-group has-icon-left">
-                                                            <label for="password-id-icon">Password</label>
-                                                            <div class="position-relative">
-                                                                <input type="password" class="form-control"
-                                                                    placeholder="Password" id="password-id-icon">
-                                                                <div class="form-control-icon">
-                                                                    <i class="bi bi-lock"></i>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12">
-                                                        <div class='form-check'>
-                                                            <div class="checkbox mt-2">
-                                                                <input type="checkbox" id="remember-me-v"
-                                                                    class='form-check-input' checked>
-                                                                <label for="remember-me-v">Remember Me</label>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12 d-flex justify-content-end">
-                                                        <button type="submit"
-                                                            class="btn btn-primary me-1 mb-1">Submit</button>
-                                                        <button type="reset"
-                                                            class="btn btn-light-secondary me-1 mb-1">Reset</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </form>
+                                        <div style="margin-top:20px;" class="form-group mb-3">
+                                            <textarea class="form-control" id="exampleFormControlTextarea1"
+                                                      rows="5"></textarea>
+                                        </div>
+
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </section>
-                <!-- // Basic Vertical form layout section end -->
-
-
-
-
-
+            </div>
+            </section>
         </div>
+        </form>
     </div>
-
 </html>

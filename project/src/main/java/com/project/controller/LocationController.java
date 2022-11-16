@@ -8,13 +8,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping(value = "/admin")
-public class AdminMainController {
+@RequestMapping(value = "/location")
+public class LocationController {
 
-    @GetMapping(value = "/Home")
-    public String adminMain(Model model){
-        return "adminHome" ;
+    @GetMapping(value = "/home")
+    public String locationHome(Model model){
+       return "location/home" ;
     }
-
-
 }

@@ -16,6 +16,9 @@
   <link rel="stylesheet" th:href="@{/bootstrap/assets/css/app.css}">
   <link rel="shortcut icon" th:href="@{/bootstrap/assets/images/favicon.svg}" type="image/x-icon">
 
+<!-- 데이트 피커 사용 -->
+
+
   <!--   구글 폰트-->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -27,17 +30,21 @@
     </style>
   </th:block>
 
+  <th:block layout:fragment="script"></th:block>
+  <th:block layout:fragment="css"></th:block>
+
 </head>
 <body>
   <!-- 사이드바 (사이드바안에 내용 레이아웃 들어 있음) -->
   <div th:replace="fragments/sidebar::sidebar"></div>
 
 
-
+  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d2246956a9e10c04ebf56a315ef5ae7d"></script>
   <script th:src="@{/bootstrap/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js}"></script>
   <script th:src="@{/bootstrap/assets/js/bootstrap.bundle.min.js}"></script>
   <script th:src="@{/bootstrap/assets/vendors/apexcharts/apexcharts.js}"></script>
   <script th:src="@{/bootstrap/assets/js/pages/dashboard.js}"></script>
   <script th:src="@{/bootstrap/assets/js/main.js}"></script>
+  <script th:src="@{/bootstrap/assets/vendors/simple-datatables/simple-datatables.js}"></script>
 </body>
 </html>

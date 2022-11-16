@@ -36,7 +36,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter { // SecurityCo
         // SecurityConfig03
         // authorizeRequests() 메소드는 시큐리티 처리시 HttpServeletRequests를 사용하고자 할 때 사용됩니다.
         http.authorizeRequests()
-                .mvcMatchers( "/","/members/**", "/products/**", "/images/**").permitAll()
+                .mvcMatchers( "/","/members/**", "/products/**", "/images/**","/location/**").permitAll()
                 .mvcMatchers("/admin/**").hasRole("ADMIN")
                 .anyRequest().authenticated() ;
 

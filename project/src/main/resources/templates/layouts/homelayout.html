@@ -2,7 +2,6 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
-<head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="author" content="Untree.co">
@@ -32,11 +31,18 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Gaegu:wght@300&family=Gamja+Flower&display=swap" rel="stylesheet">
 
+
+
+
+    <th:block layout:fragment="script"></th:block>
+    <th:block layout:fragment="css"></th:block>
 </head>
 <body>
 <!-- 네비바 (네비바안에 내용 레이아웃 들어 있음) -->
 <div th:replace="fragments/navbar::navbar"></div>
 <div th:replace="fragments/footer::footer"></div>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d2246956a9e10c04ebf56a315ef5ae7d"></script>
+
 
 <script th:src="@{/bootstrap/tour/js/jquery-3.4.1.min.js}"></script>
 <script th:src="@{/bootstrap/tour/js/popper.min.js}"></script>
@@ -64,7 +70,7 @@
 				strings: ["함께 나눠요.", "공유 주택.", "공동 구매.", "행복을 나눠요."],
 				typeSpeed: 80,
 				backSpeed: 80,
-				backDelay: 3000,
+				backDelay: 4000,
 				startDelay: 1000,
 				loop: true,
 				showCursor: true,
@@ -77,6 +83,9 @@
 
 			});
 		})
+
 	</script>
+
+
 </body>
 </html>
