@@ -2,6 +2,6 @@ package com.project.dto;
 
 import lombok.Getter;
 
-@Getter S
+@Getter
 public class MemberSerchDto {
 }
